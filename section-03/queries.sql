@@ -1,0 +1,31 @@
+SELECT
+	ID,
+	UPPER(NAME) AS UPPER_NAME,
+	LOWER(NAME) AS LOWER_NAME,
+	LENGTH(NAME) AS LENGTH,
+	20 * 2 AS CONSTANT,
+	'*' || id || '-' || name || '*' as barcode,
+	CONCAT('* ', id, ' - ', name, ' *'),
+	name
+FROM
+	USERS;
+
+SELECT
+	*
+FROM
+	USERS;
+
+SELECT
+	NAME,
+	-- SUBSTRING(NAME, 0, 5),
+	-- POSITION (' ' in name),
+	SUBSTRING(NAME, 0, POSITION(' ' IN NAME)) AS FIRST_NAME,
+	SUBSTRING(NAME, POSITION(' ' IN NAME) + 1) AS LAST_NAME,
+	-- TRIM(SUBSTRING(NAME, POSITION (' ' in name))) as trimmed_last_name
+FROM
+	USERS;
+
+UPDATE USERS
+SET
+	FIRST_NAME = SUBSTRING(NAME, 0, POSITION(' ' IN NAME)),
+	LAST_NAME = SUBSTRING(NAME, POSITION(' ' IN NAME) + 1);
